@@ -19,14 +19,16 @@ window.addEventListener('mouseup', () => mouseDown = false);
 
 function handleMouseOver(e, note, i) {
 	if (mouseDown) {
-		tonesArray[i].modAmp = scaleNumbers(0, width, 1, 10, e.clientX);
-		// tonesArray[i].play(note);
+		tonesArray[i].modAmp = scaleNumbers(0, width, 0.1, 6, e.clientX);
+		tonesArray[i].play(note, scaleNumbers(0, width, 0.1, 1.0, e.clientX));
+		createRipple(e, width);
 	} 
 }
 
 function handleMouseDown(e, note, i) {
-	tonesArray[i].modAmp = scaleNumbers(0, width, 1, 10, e.clientX);
-	// tonesArray[i].play(note);
+	tonesArray[i].modAmp = scaleNumbers(0, width, 0.1, 6, e.clientX);
+	tonesArray[i].play(note, scaleNumbers(0, width, 0.1, 1.0, e.clientX));
+	createRipple(e, width);
 }
 
 function create() {
@@ -50,13 +52,9 @@ function setTimbre() {
 		synth.modRatio = 2;
 		synth.modRatio = 2;
 		synth.modAmp = 2;
-		synth.aMod = 0.01; synth.dMod = 0.1; synth.dSus = 0.2;
+		synth.a = 0.1; 
+		synth.aMod = 1; synth.dMod = 0.01; synth.dSus = 0.2;
 	})
-}
-
-function scaleNumbers(inMax, inMin, outMax, outMin, number) {
-	percent = (number - inMin) / (inMax - inMin);
-	return percent * (outMax - outMin) + outMin;
 }
 
 create();
