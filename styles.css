@@ -3,18 +3,18 @@ body {
 }
 
 #pond {
-	border: 1px solid white;
-/*	width: 100%;
-	height: 100vh;*/
-	width: 1000px;
-	height: 500px;
+	/*border: 1px solid white;*/
+	width: 100%;
+	height: 100vh;
+/*	width: 1000px;
+	height: 500px;*/
 	position: relative;
-	/*overflow: hidden;*/
+	overflow: hidden;
 }
 
 .ripple {
-	will-change: transform;
-	will-change: opacity;
+	/*will-change: transform;*/
+	/*will-change: opacity;*/
 	z-index: -1;
 	height: 50px; 
 	width: 50px;
