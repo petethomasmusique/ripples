@@ -13,29 +13,35 @@ body {
 }
 
 .ripple {
-	/*will-change: transform;*/
-	/*will-change: opacity;*/
+	will-change: transform;
+	will-change: opacity;
 	z-index: -1;
-	height: 50px; 
-	width: 50px;
-	border: 1px solid white;
+	height: 500px; 
+	width: 500px;
+	/*border: 1px solid white;*/
 	position: absolute;
-	border-radius: 50%;
+	/*border-radius: 50%;*/
+	background-image: url('images/ripple2.png');
+	background-repeat: no-repeat;
+	background-size: contain;
 	animation-name: grow;
-	animation-duration: 10s;
+	animation-duration: 5s;
 	animation-fill-mode: forwards;
 }
 
 @keyframes grow {
 	0% {
-		transform: none;
-		opacity: 1;
+		/*transform: none;*/
+		opacity: 0;
+		transform: rotate(0);
 	}
 	50% {
-		opacity: 0;
+		opacity: 0.5;
+		transform: rotate(180);
 	}
 	100% {
-		transform: scale(50,50);
+		transform: scale(10,10);
 		opacity: 0;
+		transform: rotate(360);
 	}
 }
