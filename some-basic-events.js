@@ -20,13 +20,13 @@ window.addEventListener('mouseup', () => mouseDown = false);
 function handleMouseOver(e, note, i) {
 	if (mouseDown) {
 		tonesArray[i].modAmp = scaleNumbers(0, width, 1, 10, e.clientX);
-		tonesArray[i].play(note);
+		// tonesArray[i].play(note);
 	} 
 }
 
 function handleMouseDown(e, note, i) {
 	tonesArray[i].modAmp = scaleNumbers(0, width, 1, 10, e.clientX);
-	tonesArray[i].play(note);
+	// tonesArray[i].play(note);
 }
 
 function create() {

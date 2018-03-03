@@ -5,7 +5,7 @@ var rippleCount = 0;
 function createRipple(e) {
 	rippleCount++;
 	var div = document.createElement('div');
-	div.className = 'ripple rippling';
+	div.className = 'ripple';
 	var rippleSize = 10;
 	div.style.left = (e.clientX - (rippleSize/2) - 9) + 'px';
 	div.style.top = (e.clientY - (rippleSize/2) - 8) + 'px';
