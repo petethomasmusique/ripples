@@ -1,5 +1,4 @@
 // Refactor so as elegant as possible
-// turn down the volume dammit
 // TODO: key scaling, when higher shorter so the env isn't the same for everything
 // note on off on mouse down / mouse up
 // horizontal dragging
@@ -24,7 +23,25 @@ window.addEventListener('mouseup', () => mouseDown = false);
 
 // DATA
 var tones = [45, 48, 50, 52, 55, 57, 60, 62, 64, 67, 69];
-var tonesArray = new Array;
+var tonesArray = new Array; //  array of synths
+
+// create
+createPond();
+setTimbre();
+
+function createPond() {
+	var stripHeight = (height/tones.length); // make allowances for borders, this may change
+	tones.map( (tone, i) => {
+		tonesArray[i] = new BasicFm(audioCtx);	
+		tonesArray[i].carrier.volume.connect( reverb ); // connect synth to output of reverb
+		var div = document.createElement('div');
+		div.style.height = stripHeight + 'px';
+		div.style.width = width + 'px';
+		div.addEventListener('mousedown', (e) => handleMouseDown(e, tone + 12, i));
+		div.addEventListener('mouseover', (e) => handleMouseOver(e, tone + 12, i));
+		pond.insertBefore(div, pond.firstChild);
+	})
+}
 
 function handleMouseOver(e, note, i) {
 	if (mouseDown) {
@@ -40,19 +57,6 @@ function handleMouseDown(e, note, i) {
 	createRipple(e, width);
 }
 
-function create() {
-	var stripHeight = (height/tones.length); // make allowances for borders, this may change
-	tones.map( (tone, i) => {
-		tonesArray[i] = new BasicFm(audioCtx);	
-		tonesArray[i].carrier.volume.connect( reverb ); // connect synth to output of reverb
-		var div = document.createElement('div');
-		div.style.height = stripHeight + 'px';
-		div.style.width = width + 'px';
-		div.addEventListener('mousedown', (e) => handleMouseDown(e, tone + 12, i));
-		div.addEventListener('mouseover', (e) => handleMouseOver(e, tone + 12, i));
-		pond.insertBefore(div, pond.firstChild);
-	})
-}
 
 function setTimbre() {
 	tonesArray.map( (synth)=> {
@@ -64,6 +68,3 @@ function setTimbre() {
 		synth.aMod = 1; synth.dMod = 0.01; synth.dSus = 0.2;
 	})
 }
-
-create();
-setTimbre();
