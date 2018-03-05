@@ -1,7 +1,4 @@
-// pond.addEventListener('mousedown', (e) => createRipple(e));
-
 function createRipple(e, width) {
-	console.log(width);
 	var div = document.createElement('div');
 	div.className = 'ripple';
 	// set initial size of ripple depending on where the mouse was clicked
@@ -13,7 +10,6 @@ function createRipple(e, width) {
 	div.style.top = (e.clientY - (rippleSize/2) - 8) + 'px';
 	div.style.height = rippleSize+'px';
 	div.style.width = rippleSize+'px';
-	div.style.animationDuration = '11s';
 	pond.appendChild(div);
 }
 

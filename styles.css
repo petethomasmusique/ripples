@@ -20,7 +20,7 @@ body {
 	position: absolute;
 	border-radius: 50%;
 	animation-name: grow;
-	/*animation-duration: 11s;*/
+	animation-duration: 11s;
 	animation-fill-mode: forwards;
 }
 
