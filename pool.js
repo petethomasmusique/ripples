@@ -9,9 +9,7 @@
 // AUDIO UNITS
 var audioCtx = new (window.AudioContext || window.webkitAudioContext); // create context
 var basicFm = new BasicFm(audioCtx); // create synth
-var reverb = audioCtx.createConvolver(); // create reverb
-reverb.connect( audioCtx.destination ); // connect reverb to output
-load_ir(reverb, "sounds/minster1_000_ortf_48k.wav"); // load ir for reverb unit
+var reverb = new Reverb(audioCtx, 'sounds/minster1_000_ortf_48k.wav');
 
 // DOM 
 var mouseDown = false;
@@ -33,7 +31,7 @@ function createPond() {
 	var stripHeight = (height/tones.length); // make allowances for borders, this may change
 	tones.map( (tone, i) => {
 		tonesArray[i] = new BasicFm(audioCtx);	
-		tonesArray[i].carrier.volume.connect( reverb ); // connect synth to output of reverb
+		tonesArray[i].carrier.volume.connect( reverb.reverb ); // connect synth to output of reverb
 		var div = document.createElement('div');
 		div.style.height = stripHeight + 'px';
 		div.style.width = width + 'px';
