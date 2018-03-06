@@ -1,8 +1,5 @@
 // TODO: make noteOn, noteOff functions
-// be able to change scale
 // controls for timbre
-// visuals...
-// use react?
 
 class BasicFm {
 	constructor(audioContext) {

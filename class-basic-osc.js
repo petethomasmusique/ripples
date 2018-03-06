@@ -1,5 +1,3 @@
-// var audioCtx = new (window.AudioContext || window.webkitAudioContext);
-
 class BasicOsc {
   	constructor(audioContext, waveform, freq=440, amp=0) { // option to set amp at start
       this.osc = audioContext.createOscillator();

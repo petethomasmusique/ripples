@@ -1,6 +1,5 @@
 // requires BasicFm
 // TODO: sort out the issue of scaling up and down...
-// POND
 class Pool {
 	constructor(audioContext, outputNode, divNode, tonesArr) {
 		this._ctx = audioContext;
@@ -9,7 +8,7 @@ class Pool {
 		this._height = this._pond.clientHeight;
 		this._width = this._pond.clientWidth;
 		this._tones = tonesArr;
-		this.synths = new Array; // iterate over this to change the synth settings, should this be public?
+		this.synths = new Array; // public
 		this._createSynths();
 		this._createPond();
 		this._mouseDown = false;
@@ -24,7 +23,6 @@ class Pool {
 		} )
 	}
 	_createPond() {
-		// TODO: delete contents if you want to create the pond afresh
 		var stripHeight = (this._height/this._tones.length); 
 		// create a strip in the dom for each tone
 		this._tones.map( (tone, i) => {
@@ -56,8 +54,8 @@ class Pool {
 		var ripplesArr = Array.from(ripples);
 		if (ripplesArr.length > 0) {
 			ripplesArr.map((ripple) => {
-				var rippleDimensions = ripple.getBoundingClientRect();
-				rippleDimensions.height > 1000 ? this._pond.removeChild(ripple) : null;
+				var opacity = window.getComputedStyle(ripple).getPropertyValue('opacity');
+				opacity == 0 ? this._pond.removeChild(ripple) : null;
 			})
 		}
 	}

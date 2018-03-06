@@ -1,8 +1,5 @@
 // TODO: key scaling, when higher shorter so the env isn't the same for everything
-// start() stop() to optimize synths
-// note on off on mouse down / mouse up
 // horizontal dragging
-// hold down mouse?
 // compressor between synth and reverb
 // sound interferes with each other?
 // mouse / cursor...
