@@ -1,5 +1,3 @@
-// horizontal dragging
-// sound interferes with each other?
 // AUDIO
 var audioCtx = new (window.AudioContext || window.webkitAudioContext); // create context
 var reverb = new Reverb(audioCtx, 'sounds/minster1_000_ortf_48k.wav');
@@ -14,8 +12,11 @@ poolSynthsWet.gain.setValueAtTime(0.1, audioCtx.currentTime);
 
 // POOL
 var poolNode = document.getElementById('pond');
-var tones = [45, 48, 50, 52, 55, 57, 60, 62, 64, 67, 69];
-var pool = new Pool(audioCtx, poolSynthsWet, poolSynthsDry, poolNode, tones);
+var maj6 = [57, 60, 62, 64, 67, 69, 72, 74, 76, 79, 81];
+var min6 = [57, 60, 62, 63, 67, 69, 72, 74, 75, 79, 81];
+var wt = [60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80];
+var dim = [60, 61, 63, 64, 66, 67, 69, 70, 72, 73, 75, 76]
+var pool = new Pool(audioCtx, poolSynthsWet, poolSynthsDry, poolNode, dim);
 
 
 // iterate over pool.synths to set timbre of each
