@@ -3,8 +3,9 @@ body {
 }
 
 #pond {
-	width: 100%;
-	height: 100vh;
+	width: 50%;
+	height: 125vh;
+	border: 1px solid white;
 	position: relative;
 	overflow: hidden;
 }

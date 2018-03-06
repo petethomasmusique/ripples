@@ -1,5 +1,4 @@
 // requires BasicFm
-// TODO: sort out the issue of scaling up and down...
 class Pool {
 	constructor(audioContext, outputNode, divNode, tonesArr) {
 		this._ctx = audioContext;
@@ -37,16 +36,19 @@ class Pool {
 	_createRipple(e, i) {
 		var note = this._tones[i] + 12;
 		var synth = this.synths[i];
-		synth.modAmp = scaleNumbers(0, this._width, 0.1, 6, e.clientX);
-		synth.play(note, scaleNumbers(0, this._width, 0.1, 0.2, e.clientX));
+		var poolInfo = this._pond.getBoundingClientRect();
+		var x = e.clientX - poolInfo.x;
+		var y = e.clientY - poolInfo.y;
+		synth.modAmp = scaleNumbers(0, this._width, 0.1, 6, x);
+		synth.play(note, scaleNumbers(0, this._width, 0.1, 0.2, x));
 		var div = document.createElement('div');
 		div.className = 'ripple';
-		var rippleSize = scaleNumbers(0, this._width, 10, 100, e.clientX); // size dependent on where clicked
+		var rippleSize = scaleNumbers(0, this._width, 10, 100, x); // size dependent on where clicked
 		rippleSize = Math.floor(rippleSize);
-		div.style.left = (e.clientX - (rippleSize/2) - 9) + 'px';
-		div.style.top = (e.clientY - (rippleSize/2) - 8) + 'px';
-		div.style.height = rippleSize+'px';
-		div.style.width = rippleSize+'px';
+		div.style.left = (x - (rippleSize/2)) + 'px';
+		div.style.top = (y - (rippleSize/2)) + 'px';
+		div.style.height = rippleSize + 'px';
+		div.style.width = rippleSize + 'px';
 		this._pond.appendChild(div);
 	}
 	_deleteRipples(pondObj) {
