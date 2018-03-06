@@ -1,6 +1,3 @@
-// TODO: make noteOn, noteOff functions
-// controls for timbre
-
 class BasicFm {
 	constructor(audioContext) {
 		// initialize values
@@ -13,8 +10,7 @@ class BasicFm {
 		this.modulator = new BasicOsc(this.ctx, 'sine', 440, 0);
 		// connect modulator node to the frequency of carrier
 		this.modulator.volume.connect(this.carrier.osc.frequency);
-		// connect volume of carrier to output
-		this.carrier.volume.connect(this.ctx.destination);		
+		// connect volume of carrier to output using this.carrier.volume.connect()
 	}
 	freq_(freq) {
 		this.freq = freq; // set global carrier freq value

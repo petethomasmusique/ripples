@@ -1,8 +1,9 @@
 // requires BasicFm
 class Pool {
-	constructor(audioContext, outputNode, divNode, tonesArr) {
+	constructor(audioContext, wet, dry, divNode, tonesArr) {
 		this._ctx = audioContext;
-		this._output = outputNode;
+		this._outputWet = wet;
+		this._outputDry = dry;
 		this._pool = divNode;
 		this._height = this._pool.clientHeight;
 		this._width = this._pool.clientWidth;
@@ -18,7 +19,8 @@ class Pool {
 	_createSynths() {
 		this._tones.map( (tone, i) => {
 			this.synths[i] = new BasicFm(this._ctx);	
-			this.synths[i].carrier.volume.connect( this._output );
+			this.synths[i].carrier.volume.connect( this._outputWet );
+			this.synths[i].carrier.volume.connect( this._outputDry );
 		} )
 	}
 	_createPool() {
@@ -39,8 +41,8 @@ class Pool {
 		var poolInfo = this._pool.getBoundingClientRect();
 		var x = e.clientX - poolInfo.x;
 		var y = e.clientY - poolInfo.y;
-		synth.modAmp = scaleNumbers(0, this._width, 0.1, 6, x);
-		synth.play(note, scaleNumbers(0, this._width, 0.1, 0.2, x));
+		synth.modAmp = scaleNumbers(0, this._width, 0.1, 2, x);
+		synth.play(note, scaleNumbers(0, this._width, 0.1, 1, x));
 		var div = document.createElement('div');
 		div.className = 'ripple';
 		var rippleSize = scaleNumbers(0, this._width, 10, 100, x); // size dependent on where clicked

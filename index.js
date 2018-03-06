@@ -1,14 +1,22 @@
-// TODO: key scaling, when higher shorter so the env isn't the same for everything
 // horizontal dragging
-// compressor between synth and reverb
 // sound interferes with each other?
-// mouse / cursor...
 // AUDIO
 var audioCtx = new (window.AudioContext || window.webkitAudioContext); // create context
 var reverb = new Reverb(audioCtx, 'sounds/minster1_000_ortf_48k.wav');
+
+// ROUTING
+var poolSynthsDry = audioCtx.createGain();
+poolSynthsDry.connect(audioCtx.destination);
+poolSynthsDry.gain.setValueAtTime(0.2, audioCtx.currentTime);
+var poolSynthsWet = audioCtx.createGain();
+poolSynthsWet.connect(reverb.reverb);
+poolSynthsWet.gain.setValueAtTime(0.1, audioCtx.currentTime);
+
+// POOL
 var poolNode = document.getElementById('pond');
 var tones = [45, 48, 50, 52, 55, 57, 60, 62, 64, 67, 69];
-var pool = new Pool(audioCtx, reverb.reverb, poolNode, tones);
+var pool = new Pool(audioCtx, poolSynthsWet, poolSynthsDry, poolNode, tones);
+
 
 // iterate over pool.synths to set timbre of each
 pool.synths.map( (synth)=> {
