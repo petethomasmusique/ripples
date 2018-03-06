@@ -37,8 +37,7 @@ class Pool {
 		})
 	}
 	_createRipple(e, i) {
-		console.log('ripple');
-		var note = this._tones[i];
+		var note = this._tones[i] + 12;
 		var synth = this.synths[i];
 		synth.modAmp = scaleNumbers(0, this._width, 0.1, 6, e.clientX);
 		synth.play(note, scaleNumbers(0, this._width, 0.1, 0.2, e.clientX));
@@ -61,5 +60,8 @@ class Pool {
 				rippleDimensions.height > 1000 ? this._pond.removeChild(ripple) : null;
 			})
 		}
-	} 
+	}
+	setTones(array) {
+		this._tones = array;
+	}
 }
