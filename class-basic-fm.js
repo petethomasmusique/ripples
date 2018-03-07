@@ -1,3 +1,5 @@
+// key scaling
+
 class BasicFm {
 	constructor(audioContext) {
 		// initialize values
@@ -13,6 +15,8 @@ class BasicFm {
 		// by default connects carrier to main output. Can change using connectTo()
 		this._carrier.volume.connect(this._ctx.destination);
 	}
+
+	// PRIVATE METHODS
 	_setFreq(freq) {
 		this._freq = freq; // set global carrier _freq value
 		this._setHarmonicity(); // set global mod _freq value

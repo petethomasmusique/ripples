@@ -1,9 +1,10 @@
 // requires BasicFm
 class Pool {
 	constructor(audioContext, wet, dry, divNode, tonesArr) {
+		// console.log(audioContext, wet, dry, divNode, tonesArr);// WTF?
 		this._ctx = audioContext;
-		this._outputWet = wet;
 		this._outputDry = dry;
+		this._outputWet = wet;
 		this._pool = divNode;
 		this._height = this._pool.clientHeight;
 		this._width = this._pool.clientWidth;
@@ -41,7 +42,6 @@ class Pool {
 		var poolInfo = this._pool.getBoundingClientRect();
 		var x = e.clientX - poolInfo.x;
 		var y = e.clientY - poolInfo.y;
-		synth.modAmp = scaleNumbers(0, this._width, 0.1, 1, x);
 		synth.play(note, scaleNumbers(0, this._width, 0.1, 1, x));
 		var div = document.createElement('div');
 		div.className = 'ripple';
