@@ -19,8 +19,8 @@ class Pool {
 	_createSynths() {
 		this._tones.map( (tone, i) => {
 			this.synths[i] = new BasicFm(this._ctx);	
-			this.synths[i].carrier.volume.connect( this._outputWet );
-			this.synths[i].carrier.volume.connect( this._outputDry );
+			this.synths[i].connectTo( this._outputDry, true ); // true - disconnect from others first
+			this.synths[i].connectTo( this._outputWet, false ); // false - connect to both dry and wet
 		} )
 	}
 	_createPool() {

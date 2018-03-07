@@ -12,12 +12,10 @@ var pool = new Pool(audioCtx, reverb.reverb, poolNode, tones);
 
 // iterate over pool.synths to set timbre of each
 pool.synths.map( (synth)=> {
-	synth.carrRatio = 1;
-	synth.modRatio = 2;
-	synth.modRatio = 2;
-	synth.modAmp = 2;
-	synth.a = 0.1; 
-	synth.aMod = 1; synth.dMod = 0.01; synth.dSus = 0.2;
+	synth.setRatio(1, 2)
+	synth.setModAmp(2)
+	synth._a = 0.1; 
+	synth.setModEnv(1, 0.01, 0.2, 1, 0.5);
 })
 
 // use pool.setTones() to change the scale of the pool
