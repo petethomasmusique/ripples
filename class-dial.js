@@ -6,6 +6,7 @@ class Dial {
 		this._mousedown = false;
 		this._createDial();
 		this._value = 63;
+		this._screenY = 0;
 	}
 	_createDial() {
 		this._dial = this._createDomNode( 'div', 'dial_'+this._id, 'dial');
@@ -29,23 +30,16 @@ class Dial {
 		return node;
 	}
 	_addEventListeners() {
-		this._dial.addEventListener('mousedown', (e) => this._handleMouseDown(e));
+		this._dial.addEventListener('mousedown', () => this._mousedown = true);
 		window.addEventListener('mouseup', () => this._mousedown = false);
-		this._dial.addEventListener('mousemove', (e) => this._mousedown ? this._handleMouseMove(e) : null);
-	}
-	_handleMouseDown(e) {
-		var y = this._dialInfo.height - e.offsetY;
-		this._yOnMouseDown = Math.floor(this._scaleNumbers(this._dialInfo.height, 0, 127, 0, y));
-		this._mousedown = true;
+		this._controls.addEventListener('mousemove', (e) => this._mousedown ? this._handleMouseMove(e) : null);
 	}
 	_handleMouseMove(e) {
-		var y = this._dialInfo.height - e.offsetY;
-		var yMidi = Math.floor(this._scaleNumbers(this._dialInfo.height, 0, 127, 0, y));
-		if (this._value > 0 && this._value < 127) {
-			this._value += yMidi > this._yOnMouseDown ? 1 : -1;
-		}
-		console.log(this._value);
-		// this._value = this._value < 127 ? Math.floor(this._scaleNumbers(this._dialInfo.height, 0, 127, 0, y)) : 126;
+		var screenY = e.screenY;
+		var value = this._value;
+		value += (screenY - this._screenY) > 0 ? -3 : 2;	
+		this._value = value >= 0 && value <= 127 ? value : this._value; 
+		this._screenY = screenY;
 		this._rotateDial();
 	}
 	_rotateDial() {

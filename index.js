@@ -32,7 +32,7 @@ pool.synths.map( (synth)=> {
 
 // CONTROLS
 var controlContainer = document.getElementById('controls');
-var controls = ['volume', 'scale'];
+var controls = ['volume'];
 controls = controls.map((item, i) => new Dial(controlContainer, i, item))
 var ampDial = controls[0];
 ampDial._dial.addEventListener('mousemove', (e) => handleAmpEvent(e));

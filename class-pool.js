@@ -13,7 +13,7 @@ class Pool {
 		this._createSynths();
 		this._createPool();
 		this._mouseDown = false;
-		window.addEventListener('mousedown', () => this._mouseDown = true);
+		this._pool.addEventListener('mousedown', () => this._mouseDown = true);
 		window.addEventListener('mouseup', () => this._mouseDown = false);
 		setInterval(() => this._deleteRipples(), 1000);
 	}

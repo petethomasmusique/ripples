@@ -4,8 +4,7 @@ body {
 
 #pond {
 	width: 100%;
-	height: 80vh;
-	border: 1px solid white;
+	height: 100vh;
 	position: relative;
 	overflow: hidden;
 	cursor: crosshair;
@@ -31,30 +30,31 @@ body {
 }
 
 #controls {
-	width: 100%;
-	height: 15vh;
-	/*border: 1px solid white;*/
+	padding-top: 10px;
+	padding-right: 10px;
+	width: 100px;
+	height: 100vh;
+	position: absolute;
+	right: 0;
+	top: 0;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	opacity: 0;
+}
+#controls:hover {
+	opacity: 0.5;
 }
 
 .dial {
-	margin: 0 1vh;
-	/*border: 1px solid white;*/
-	border-radius: 4px;
-	width: 10vh;
-	height: 10vh;
-	display: flex;
-	align-items: center;
+	width: 60px;
+	height: 60px;
 	position: relative;
 }
 
 .face {
-	border: 1px solid white;
+	border: 3px solid #838B8B;
 	height: 90%;
 	width: 90%;
-	margin: auto;
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;
@@ -62,19 +62,21 @@ body {
 .position {
 	height: 100%;
 	width: 1px;
+	transform: translateX(-1px);
 }
 .tip {
 	height: 50%;
-	width: 3px;
+	width: 4px;
 	border-radius: 2px;
-	background-color: #FFF;
+	background-color: #838B8B;
 }
 .label {
+	user-select: none;
 	position: absolute;
 	width: 100%;
-	color: #FFF;
-	bottom: -5vh;
-	font-size: 2vh;
+	color: #838B8B;
+	bottom: -40px;
+	font-size: 14px;
 	text-align: center;
 	font-family: 'Saira Condensed', sans-serif;
 	font-weight: 'thin';
