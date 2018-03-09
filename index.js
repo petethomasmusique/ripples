@@ -29,3 +29,9 @@ pool.synths.map( (synth)=> {
 
 // use pool.setTones() to change the scale of the pool
 // pool.setTones(tonesModulated);
+
+// CONTROLS
+var controlContainer = document.getElementById('controls');
+var controls = ['FMratio', 'scale'];
+controls = controls.map((item, i) => new Dial(controlContainer, i, item))
+console.log(controls);

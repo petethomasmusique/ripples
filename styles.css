@@ -4,8 +4,8 @@ body {
 
 #pond {
 	width: 100%;
-	height: 100vh;
-	/*border: 1px solid white;*/
+	height: 80vh;
+	border: 1px solid white;
 	position: relative;
 	overflow: hidden;
 	cursor: crosshair;
@@ -28,4 +28,55 @@ body {
 	1% { opacity: 0; }
 	20% { opacity: 1; }
 	100% { transform: scale(10,10); opacity: 0;}
+}
+
+#controls {
+	width: 100%;
+	height: 15vh;
+	/*border: 1px solid white;*/
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.dial {
+	margin: 0 1vh;
+	/*border: 1px solid white;*/
+	border-radius: 4px;
+	width: 10vh;
+	height: 10vh;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.face {
+	border: 1px solid white;
+	height: 90%;
+	width: 90%;
+	margin: auto;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+}
+.position {
+	height: 100%;
+	width: 1px;
+}
+.tip {
+	height: 50%;
+	width: 3px;
+	border-radius: 2px;
+	background-color: #FFF;
+}
+.label {
+	position: absolute;
+	width: 100%;
+	color: #FFF;
+	bottom: -5vh;
+	font-size: 2vh;
+	text-align: center;
+	font-family: 'Saira Condensed', sans-serif;
+	font-weight: 'thin';
+	text-transform: uppercase;
 }
