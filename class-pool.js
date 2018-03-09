@@ -42,7 +42,7 @@ class Pool {
 		var poolInfo = this._pool.getBoundingClientRect();
 		var x = e.clientX - poolInfo.x;
 		var y = e.clientY - poolInfo.y;
-		synth.play(note, scaleNumbers(0, this._width, 0.1, 1, x));
+		synth.play(note, Math.floor(scaleNumbers(0, this._width, 0, 127, x)));
 		var div = document.createElement('div');
 		div.className = 'ripple';
 		var rippleSize = scaleNumbers(0, this._width, 10, 100, x); // size dependent on where clicked

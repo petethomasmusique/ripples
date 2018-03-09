@@ -49,13 +49,17 @@ class BasicFm {
 		var positionFromConcertA = note - 69;
 		return 440 * Math.pow(2, positionFromConcertA/12);
 	}
+	_scaleNumbers(inMax, inMin, outMax, outMin, number) {
+		var percent = (number - inMin) / (inMax - inMin);
+		return percent * (outMax - outMin) + outMin;
+	}
 
 	// PUBLIC METHODS
-	play(note=60, amp=this._amp) {
+	play(note=60, volume=127) {
 		var freq = this._getMidiCps(note);
 		this._setFreq(freq);
-		this._amp = amp;
-		this._triggerEnv(this._carrier, this._amp, this._a, this._d, this._s, this._r, this._sLevel);
+		var amp = this._scaleNumbers(127, 0, 1, 0, volume) * this._amp;
+		this._triggerEnv(this._carrier, amp, this._a, this._d, this._s, this._r, this._sLevel);
 		this._triggerEnv(this._modulator, this._modAmp * this._harmonicity * this._amp, this._amp, this._aMod, this._dMod, this._sMod, this._rMod, this._sLevel);
 	}
 	setCarrEnv(a, d, s, r, sLevel) {
@@ -82,5 +86,12 @@ class BasicFm {
 	connectTo(outputNode, replace=true) {
 		replace ? this._carrier.volume.disconnect() : null; // disconnect from all other sources first?
 		this._carrier.volume.connect(outputNode);
+	}
+	setAmpMidi(midiVal) {
+		var amp = this._scaleNumbers(127, 0, 1, 0, midiVal);
+		this._amp = amp;
+	}
+	getAmpMidi(midiVal) {
+		return this._scaleNumbers(1, 0, 127, 0, this._amp);
 	}
 }

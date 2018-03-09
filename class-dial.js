@@ -1,12 +1,11 @@
 class Dial {
-	constructor(containerDiv, id, label, onChange) {
+	constructor(containerDiv, id, label) {
 		this._controls = containerDiv;
 		this._id = id;
 		this._label = label;
 		this._mousedown = false;
 		this._createDial();
 		this._value = 0;
-		this._onChange = onChange;
 	}
 	_createDial() {
 		this._dial = document.createElement('div');
@@ -37,8 +36,7 @@ class Dial {
 	_handleMouseMove(e) {
 		var y = this._dialInfo.height - e.offsetY;
 		this._value = this._value < 127 ? Math.floor(this._scaleNumbers(this._dialInfo.height, 0, 127, 0, y)) : 126;
-		// this._rotateDial();
-		// this._onChange(this._scaleNumbers(127, 0, 1, 0, this._value));
+		this._rotateDial();
 	}
 	_rotateDial() {
 		var deg = this._scaleNumbers(127, 0, 160, -160, this._value);
@@ -47,5 +45,10 @@ class Dial {
 	_scaleNumbers(inMax, inMin, outMax, outMin, number) {
 		var percent = (number - inMin) / (inMax - inMin);
 		return percent * (outMax - outMin) + outMin;
+	}
+
+	// PUBLIC METHODS
+	getValue() {
+		return this._value;
 	}
 }
