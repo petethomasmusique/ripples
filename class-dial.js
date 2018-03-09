@@ -5,37 +5,47 @@ class Dial {
 		this._label = label;
 		this._mousedown = false;
 		this._createDial();
-		this._value = 0;
+		this._value = 63;
 	}
 	_createDial() {
-		this._dial = document.createElement('div');
-		this._dial.setAttribute('id', 'dial_'+this._id);
-		this._dial.className = 'dial';
-		var face = document.createElement('div');
-		face.className = 'face';
+		this._dial = this._createDomNode( 'div', 'dial_'+this._id, 'dial');
+		var face = this._createDomNode( 'div', false, 'face');
 		this._dial.appendChild(face);
-		this._position = document.createElement('div');
-		this._position.className = 'position';
+		this._position = this._createDomNode( 'div', false, 'position');
 		face.appendChild(this._position);
-		var tip = document.createElement('div');
-		tip.className = 'tip';
+		var tip = this._createDomNode( 'div', false, 'tip');
 		this._position.appendChild(tip);
 		this._controls.appendChild(this._dial);
-		this._dialInfo = this._dial.getBoundingClientRect();
-		var label = document.createElement('p');
-		label.className = 'label';
+		var label = this._createDomNode( 'p', false, 'label');
 		label.textContent = this._label;
 		this._dial.appendChild(label);
+		this._dialInfo = this._dial.getBoundingClientRect();
 		this._addEventListeners();
 	}
+	_createDomNode(tag, id, className) {
+		var node = document.createElement(tag);
+		id ? node.setAttribute('id', id) : null;
+		className ? node.className = className : null;
+		return node;
+	}
 	_addEventListeners() {
-		this._dial.addEventListener('mousedown', () => this._mousedown = true);
+		this._dial.addEventListener('mousedown', (e) => this._handleMouseDown(e));
 		window.addEventListener('mouseup', () => this._mousedown = false);
 		this._dial.addEventListener('mousemove', (e) => this._mousedown ? this._handleMouseMove(e) : null);
 	}
+	_handleMouseDown(e) {
+		var y = this._dialInfo.height - e.offsetY;
+		this._yOnMouseDown = Math.floor(this._scaleNumbers(this._dialInfo.height, 0, 127, 0, y));
+		this._mousedown = true;
+	}
 	_handleMouseMove(e) {
 		var y = this._dialInfo.height - e.offsetY;
-		this._value = this._value < 127 ? Math.floor(this._scaleNumbers(this._dialInfo.height, 0, 127, 0, y)) : 126;
+		var yMidi = Math.floor(this._scaleNumbers(this._dialInfo.height, 0, 127, 0, y));
+		if (this._value > 0 && this._value < 127) {
+			this._value += yMidi > this._yOnMouseDown ? 1 : -1;
+		}
+		console.log(this._value);
+		// this._value = this._value < 127 ? Math.floor(this._scaleNumbers(this._dialInfo.height, 0, 127, 0, y)) : 126;
 		this._rotateDial();
 	}
 	_rotateDial() {
