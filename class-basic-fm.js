@@ -4,7 +4,7 @@ class BasicFm {
 	constructor(audioContext) {
 		// initialize values
 		this._ctx = audioContext;
-		this._freq = 200; this._amp = 0.5;
+		this._freq = 200; this._vol = 0.5;
 		this._carrRatio = 5; this._modRatio = 4; this._modAmp = 4;
 		this._a = 0.1; this._d = 0.1; this._s = 1; this._r = 1; this._sLevel = 0.5;
 		this._aMod = 0.1; this._dMod = 0.1; this._sMod = 1; this._rMod = 1; this._sLevelMod = 0.5;
@@ -58,9 +58,9 @@ class BasicFm {
 	play(note=60, volume=127) {
 		var freq = this._getMidiCps(note);
 		this._setFreq(freq);
-		var amp = this._scaleNumbers(127, 0, 1, 0, volume) * this._amp;
+		var amp = this._scaleNumbers(127, 0, 1, 0, volume) * this._vol;
 		this._triggerEnv(this._carrier, amp, this._a, this._d, this._s, this._r, this._sLevel);
-		this._triggerEnv(this._modulator, this._modAmp * this._harmonicity * this._amp, this._amp, this._aMod, this._dMod, this._sMod, this._rMod, this._sLevel);
+		this._triggerEnv(this._modulator, this._modAmp * this._harmonicity * amp, this._aMod, this._dMod, this._sMod, this._rMod, this._sLevel);
 	}
 	setCarrEnv(a, d, s, r, sLevel) {
 		this._a = a;
@@ -87,11 +87,8 @@ class BasicFm {
 		replace ? this._carrier.volume.disconnect() : null; // disconnect from all other sources first?
 		this._carrier.volume.connect(outputNode);
 	}
-	setAmpMidi(midiVal) {
-		var amp = this._scaleNumbers(127, 0, 1, 0, midiVal);
-		this._amp = amp;
-	}
-	getAmpMidi(midiVal) {
-		return this._scaleNumbers(1, 0, 127, 0, this._amp);
+	setVolMidi(midiVal) {
+		var vol = this._scaleNumbers(127, 0, 1, 0, midiVal);
+		this._vol = vol;
 	}
 }

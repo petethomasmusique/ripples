@@ -25,7 +25,6 @@ pool.synths.map( (synth)=> {
 	synth.setModAmp(0.5);
 	synth.setCarrEnv(0.1, 0.1, 1, 1, 0.5);
 	synth.setModEnv(1, 0.01, 0.2, 1, 0.5);
-	synth.setAmpMidi(5);
 })
 
 // use pool.setTones() to change the scale of the pool
@@ -33,7 +32,7 @@ pool.synths.map( (synth)=> {
 
 // CONTROLS
 var controlContainer = document.getElementById('controls');
-var controls = ['amp', 'scale'];
+var controls = ['volume', 'scale'];
 controls = controls.map((item, i) => new Dial(controlContainer, i, item))
 var ampDial = controls[0];
 ampDial._dial.addEventListener('mousemove', (e) => handleAmpEvent(e));
@@ -41,8 +40,7 @@ ampDial._dial.addEventListener('mousemove', (e) => handleAmpEvent(e));
 function handleAmpEvent(e) {
 	if(ampDial._mousedown) {
 		pool.synths.map((synth) => {
-			synth.setAmpMidi(ampDial._value);
-			console.log(synth.getAmpMidi());
+			synth.setVolMidi(ampDial._value);
 		})
 	}
 }
