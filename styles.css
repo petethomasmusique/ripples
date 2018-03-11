@@ -11,6 +11,7 @@ body {
 }
 
 .ripple {
+	-webkit-backface-visibility: hidden;
 	will-change: transform;
 	will-change: opacity;
 	image-rendering: crisp-edges;
@@ -29,6 +30,10 @@ body {
 	20% { opacity: 1; }
 	100% { 
 		transform: scale(10,10); 
+		-ms-transform: scale(10,10); /* IE 9 */
+	    -webkit-transform: scale(10,10); /* Safari and Chrome */
+	    -o-transform: scale(10,10); /* Opera */
+	    -moz-transform: scale(10,10); /* Firefox */
 		opacity: 0;
 	}
 }
