@@ -1,11 +1,12 @@
 class Dial {
-	constructor(containerDiv, id, label) {
+	constructor(containerDiv, id, label, startValue) {
 		this._controls = containerDiv;
 		this._id = id;
 		this._label = label;
 		this._mousedown = false;
 		this._createDial();
-		this._value = 63;
+		this._value = startValue;
+		this._rotateDial();
 		this._screenY = 0;
 	}
 	_createDial() {
