@@ -91,4 +91,16 @@ class BasicFm {
 		var vol = this._scaleNumbers(127, 0, 1, 0, midiVal);
 		this._vol = vol;
 	}
+	setCarrierMidi(midiVal) {
+		var carrRatio = Math.floor(this._scaleNumbers(127, 0, 13, 1, midiVal)); // scale to integers 1 - 12
+		this._carrRatio = carrRatio;
+	}
+	setModulatorMidi(midiVal) {
+		var modRatio = Math.floor(this._scaleNumbers(127, 0, 13, 1, midiVal)); // scale to integers 1 - 12
+		this._modRatio = modRatio;
+	}
+	setModAmpMidi(midiVal) {
+		var modAmp = this._scaleNumbers(127, 0, 10, 1, midiVal); 
+		this._modAmp = modAmp;	
+	}
 }

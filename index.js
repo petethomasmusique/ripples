@@ -32,10 +32,16 @@ pool.synths.map( (synth)=> {
 
 // CONTROLS
 var controlContainer = document.getElementById('controls');
-var controls = ['volume'];
+var controls = ['volume', 'osc1', 'osc2', 'modAmp'];
 controls = controls.map((item, i) => new Dial(controlContainer, i, item))
 var ampDial = controls[0];
 ampDial._dial.addEventListener('mousemove', (e) => handleAmpEvent(e));
+var carrierDial = controls[1];
+carrierDial._dial.addEventListener('mousemove', (e) => handleCarrierRatioEvent(e));
+var modulatorDial = controls[2];
+modulatorDial._dial.addEventListener('mousemove', (e) => handleModulatorRatioEvent(e));
+var modAmpDial = controls[3];
+modAmpDial._dial.addEventListener('mousemove', (e) => handleModAmpEvent(e));
 
 function handleAmpEvent(e) {
 	if(ampDial._mousedown) {
@@ -43,4 +49,25 @@ function handleAmpEvent(e) {
 			synth.setVolMidi(ampDial._value);
 		})
 	}
+}
+function handleCarrierRatioEvent(e) {
+	if(carrierDial._mousedown) {
+		pool.synths.map((synth) => {
+			synth.setCarrierMidi(carrierDial._value);
+		})
+	}
+}
+function handleModulatorRatioEvent(e) {
+	if(modulatorDial._mousedown) {
+		pool.synths.map((synth) => {
+			synth.setModulatorMidi(modulatorDial._value);
+		})
+	}	
+}
+function handleModAmpEvent(e) {
+	if(modAmpDial._mousedown) {
+		pool.synths.map((synth) => {
+			synth.setModAmpMidi(modAmpDial._value);
+		})
+	}	
 }
